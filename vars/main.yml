@@ -80,6 +80,9 @@ neutron_optional_dragonflow_pip_packages:
   - dragonflow
   - python-etcd
 
+neutron_optional_opendaylight_pip_packages:
+  - networking-odl
+
 neutron_proprietary_nuage_pip_packages:
   - nuage-openstack-neutron
   - nuage-openstack-neutronclient
@@ -94,6 +97,7 @@ neutron_developer_constraints:
   - "git+{{ calico_git_repo }}@{{ calico_git_install_branch }}#egg=felix"
   - "git+{{ networking_calico_git_repo }}@{{ networking_calico_git_install_branch }}#egg=networking-calico"
   - "git+{{ dragonflow_git_repo }}@{{ dragonflow_git_install_branch }}#egg=dragonflow"
+  - "git+{{ networking_odl_git_repo }}@{{ networking_odl_git_install_branch }}#egg=networking-odl"
 
 neutron_bin: "/openstack/venvs/neutron-{{ neutron_venv_tag }}/bin"
 
@@ -189,6 +193,14 @@ neutron_plugins:
     mechanisms: "sriovnicswitch"
     plugin_ini: plugins/ml2/sriov_nic_agent.ini
     plugin_conf_ini_overrides: "{{ neutron_sriov_nic_agent_ini_overrides }}"
+  ml2.opendaylight:
+    drivers_type: "vxlan"
+    mechanisms: "opendaylight"
+    plugin_conf_ini_overrides: "{{ neutron_opendaylight_conf_ini_overrides }}"
+    plugin_core: ml2
+    plugin_ini: plugins/ml2/ml2_conf.ini
+    driver_interface: "openvswitch"
+    l3_agent_mode: "legacy"
 
 ###
 ### ML2 Plugin Configuration

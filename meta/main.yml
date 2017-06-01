@@ -45,3 +45,9 @@ dependencies:
               neutron_services['neutron-server']['group']
             ]) | length > 0
          }}"
+  - role: opendaylight
+    install_method: deb_repo
+    extra_features: ['odl-netvirt-openstack']
+    when:
+     - "{{ inventory_hostname == groups['neutron_server'][0] }}"
+     - "{{ neutron_plugin_type == 'ml2.opendaylight' }}"
