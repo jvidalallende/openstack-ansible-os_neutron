@@ -11,12 +11,14 @@
     enabled: no
   when: inventory_hostname in groups['neutron_agent']
 
-- name: Ensure neutron-openvswitch-agent is stopped
-  service:
-    name: "neutron-openvswitch-agent"
-    state: stopped
-    enabled: no
-  when: inventory_hostname in groups['neutron_agent']
+# neutron-openvswitch-agent is only installed when ml2.ovs is set
+#
+#- name: Ensure neutron-openvswitch-agent is stopped
+#  service:
+#    name: "neutron-openvswitch-agent"
+#    state: stopped
+#    enabled: no
+#  when: inventory_hostname in groups['neutron_agent']
 
 - name: Stop openvswitch-switch service
   service:
