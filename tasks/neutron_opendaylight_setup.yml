@@ -38,4 +38,6 @@
 - name: Start openvswitch-switch service
   service:
     name: "openvswitch-switch"
+  when:
+    - inventory_hostname in groups['compute_hosts']
 
