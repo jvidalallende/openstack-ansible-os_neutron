@@ -40,6 +40,22 @@
 - name: Start openvswitch-switch service
   service:
     name: "openvswitch-switch"
+    state: started
   when:
     - inventory_hostname in groups['compute_hosts']
 
+- name: Set fact with controller IP address
+  set_fact:
+    odl_ip: "{{ hostvars[groups['neutron_server'][0]]['ansible_eth1']['ipv4']['address'] }}"
+  when:
+    - inventory_hostname in groups['compute_hosts']
+
+- name: Set Opendaylight as manager
+  command: ovs-vsctl set-manager tcp:{{ odl_ip }}:6640
+  when:
+    - inventory_hostname in groups['compute_hosts']
+
+- name: Configure hosts for networking-odl
+  command: "{{ neutron_bin }}/neutron-odl-ovs-hostconfig"
+  when:
+    - inventory_hostname in groups['compute_hosts']
