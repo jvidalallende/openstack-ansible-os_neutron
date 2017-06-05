@@ -196,9 +196,9 @@ neutron_plugins:
     plugin_conf_ini_overrides: "{{ neutron_sriov_nic_agent_ini_overrides }}"
   ml2.opendaylight:
     drivers_type: "local,flat,vlan,gre,vxlan"
-    mechanisms: "opendaylight"
+    mechanisms: "opendaylight_v2"
     plugin_conf_ini_overrides: "{{ neutron_opendaylight_conf_ini_overrides }}"
-    plugin_core: ml2
+    plugin_core: neutron.plugins.ml2.plugin.Ml2Plugin
     plugin_ini: plugins/ml2/ml2_conf.ini
     driver_interface: "openvswitch"
     l3_agent_mode: "legacy"
