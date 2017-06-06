@@ -43,5 +43,5 @@
 - name: Set Opendaylight as manager
   command: ovs-vsctl set-manager tcp:{{ odl_ip }}:6640
 
-- name: Configure hosts for networking-odl
-  command: "{{ neutron_bin }}/neutron-odl-ovs-hostconfig"
+- name: Configure hosts for networking-odl, force kernel datapath
+  command: "{{ neutron_bin }}/neutron-odl-ovs-hostconfig --noovs_dpdk"
