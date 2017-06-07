@@ -1,16 +1,3 @@
-- name: Ensure neutron-server service is stopped
-  service:
-    name: "neutron-server"
-    state: stopped
-  when: inventory_hostname in groups['neutron_server']
-
-- name: Ensure neutron-l3-agent is stopped
-  service:
-    name: "neutron-l3-agent"
-    state: stopped
-    enabled: no
-  when: inventory_hostname in groups['neutron_agent']
-
 - name: Stop openvswitch-switch service
   service:
     name: "openvswitch-switch"
