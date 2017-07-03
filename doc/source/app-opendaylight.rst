@@ -64,3 +64,19 @@ using the ``ml2_odl`` section.
  * **password**: OpenDaylight northbound API password for <username>
  * **port_binding_controller**: the method used for Neutron port binding,
    typically ``pseudo-agentdb-binding``.
+
+Security information
+~~~~~~~~~~~~~~~~~~~~
+
+Communications between the OpenDaylight SDN Controller and Open vSwitch are not
+secured by default. For further information on securing this interface, see
+these manuals:
+
+TLS Support on OpenDaylight OpenFlow plugin:
+
+    https://wiki.opendaylight.org/view/OpenDaylight_OpenFlow_Plugin:_TLS_Support
+
+Secure Communication Between OpenFlow Switches and Controllers
+
+    https://www.thinkmind.org/download.php?articleid=afin_2015_2_30_40047
+
