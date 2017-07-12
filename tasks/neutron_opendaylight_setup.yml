@@ -15,7 +15,7 @@
 
 - name: Set fact with controller IP address
   set_fact:
-    odl_ip: "{{ hostvars[groups['opendaylight'][0]]['ansible_default_ipv4']['address'] }}"
+    odl_ip: "{{ hostvars[groups['opendaylight'][0]]['ansible_eth1']['ipv4']['address'] }}"
 
 - name: Set Opendaylight as manager
   command: ovs-vsctl set-manager tcp:{{ odl_ip }}:6640
