@@ -13,19 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: Set fact with controller IP address
+- name: Set fact with ODL controller IP address
   set_fact:
-    odl_ip: "{{ hostvars[groups['opendaylight'][0]]['ansible_eth1']['ipv4']['address'] }}"
+    odl_ip: "{{ hostvars[groups['opendaylight'][0]]['ansible_host'] }}"
 
-- name: Set Opendaylight as manager
+- name: Set ODL as OvS manager
   command: ovs-vsctl set-manager tcp:{{ odl_ip }}:6640
 
 - name: Configure hosts for networking-odl, force kernel datapath
   command: "{{ neutron_bin }}/neutron-odl-ovs-hostconfig --noovs_dpdk"
 
-- name: Set fact with local IP
-  set_fact:
-    ovs_local_ip: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
-
 - name: Set local ip for OpenvSwitch
-  command: "ovs-vsctl set Open_vSwitch . other_config:local_ip={{ ovs_local_ip }}"
+  command: "ovs-vsctl set Open_vSwitch . other_config:local_ip={{ neutron_local_ip }}"
