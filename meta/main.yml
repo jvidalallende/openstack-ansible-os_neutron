@@ -49,13 +49,5 @@ dependencies:
     install_method: "{{ opendaylight_install_method | default('deb_repo') }}"
     extra_features: "{{ opendaylight_extra_features | default(['odl-netvirt-openstack']) }}"
     when:
-     - ansible_os_family == "Debian"
-     - inventory_hostname in groups["opendaylight"]
-     - neutron_plugin_type == "ml2.opendaylight"
-  - role: opendaylight
-    install_method: "{{ opendaylight_install_method | default('rpm_repo') }}"
-    extra_features: "{{ opendaylight_extra_features | default(['odl-netvirt-openstack']) }}"
-    when:
-     - ansible_os_family in ["RedHat", "Suse"]
      - inventory_hostname in groups["opendaylight"]
      - neutron_plugin_type == "ml2.opendaylight"
